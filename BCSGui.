@@ -1,0 +1,11 @@
+#include "BCSGui."
+
+BCSGui::BCSGui()
+{
+    //ctor
+}
+
+BCSGui::~BCSGui()
+{
+    //dtor
+}

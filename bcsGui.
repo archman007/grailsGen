@@ -1,0 +1,11 @@
+#include "bcsGui."
+
+bcsGui::bcsGui()
+{
+    //ctor
+}
+
+bcsGui::~bcsGui()
+{
+    //dtor
+}

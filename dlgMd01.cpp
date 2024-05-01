@@ -241,7 +241,7 @@ void dlgMd01::RefreshDetails()
     lblStatus->SetLabel(zlabel);
 //    lblStatus->Label = zlabel;
 //    lblStatus->Update();
-//    lblStatus->Refresh();
+//    lblStatus->Refresh();Blog
 }
 
 dlgMd01::~dlgMd01()
@@ -601,8 +601,8 @@ void dlgMd01::OnpumNewBlogPostSelected(wxCommandEvent& event)
 //</a>
 
     string tbuf;
-    tbuf = "<a href=\"http://archman.us\" target=\"_blank\" rel=\"noopener\">";
-    tbuf = tbuf + "    <img src=\"http://archman.us/images/usa_3a.gif\" alt=\" \" />";
+    tbuf = "<a href=\"https://archman.us\" target=\"_blank\" rel=\"noopener\">";
+    tbuf = tbuf + "    <img src=\"https://archman.us/images/usa_3a.gif\" alt=\" \" />";
     tbuf = tbuf + "</a>\n\n";
     //tbuf = "<img src=\"http://archman.us/images/usa_3a.gif\" alt=\"\" />\n\n";
     tbuf = tbuf + "Mr. Arch Brooks, Software Engineer, Brooks Computing Systems, LLC authored this article.";

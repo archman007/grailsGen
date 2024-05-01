@@ -95,7 +95,7 @@
 			</object>
 			<object class="wxMenuItem" name="ID_MENUITEM31" variable="pumCode" member="yes">
 				<label>Code (VS)</label>
-				<handler function="OnMenuItem9Selected" entry="EVT_MENU" />
+				<handler function="OnpumCodeSelected" entry="EVT_MENU" />
 			</object>
 			<object class="wxMenu" name="ID_MENUITEM22" variable="MenuItem5" member="yes">
 				<label>Tools</label>

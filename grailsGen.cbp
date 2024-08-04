@@ -67,6 +67,8 @@
 		<Unit filename="dlgBrowser.h" />
 		<Unit filename="dlgDe01.cpp" />
 		<Unit filename="dlgDe01.h" />
+		<Unit filename="dlgGetStrFromUser.cpp" />
+		<Unit filename="dlgGetStrFromUser.h" />
 		<Unit filename="dlgMd01.cpp" />
 		<Unit filename="dlgMd01.h" />
 		<Unit filename="dlgNb01.cpp" />

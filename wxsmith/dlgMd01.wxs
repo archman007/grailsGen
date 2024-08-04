@@ -93,6 +93,56 @@
 				<label>New Blog Post</label>
 				<handler function="OnpumNewBlogPostSelected" entry="EVT_MENU" />
 			</object>
+			<object class="wxMenuItem" name="ID_MENUITEM48" variable="pumWiki" member="yes">
+				<label>Wikipedia</label>
+				<handler function="OnpumWikiSelected" entry="EVT_MENU" />
+			</object>
+			<object class="wxMenuItem" name="ID_MENUITEM49" variable="pumSmartyApp" member="yes">
+				<label>New Smarty Project</label>
+				<handler function="OnpumSmartyAppSelected" entry="EVT_MENU" />
+			</object>
+			<object class="wxMenuItem" name="ID_MENUITEM50" variable="pumEmail01" member="yes">
+				<label>Email For Arch Brooks.com</label>
+				<handler function="OnpumEmail01Selected" entry="EVT_MENU" />
+			</object>
+			<object class="wxMenuItem" name="ID_MENUITEM51" variable="pumLACob" member="yes">
+				<label>List All COBOL Files</label>
+				<handler function="OnpumLACobSelected" entry="EVT_MENU" />
+			</object>
+			<object class="wxMenu" name="ID_MENUITEM36" variable="MenuItem10" member="yes">
+				<label>Development</label>
+				<object class="wxMenu" name="ID_MENUITEM39" variable="MenuItem13" member="yes">
+					<label>c++</label>
+					<object class="wxMenuItem" name="ID_MENUITEM42" variable="MenuItem16" member="yes">
+						<label>Executable</label>
+					</object>
+				</object>
+				<object class="wxMenu" name="ID_MENUITEM37" variable="MenuItem11" member="yes">
+					<label>COBOL</label>
+					<object class="wxMenuItem" name="ID_MENUITEM43" variable="MenuItem17" member="yes">
+						<label>Executable</label>
+					</object>
+				</object>
+				<object class="wxMenu" name="ID_MENUITEM38" variable="MenuItem12" member="yes">
+					<label>FORTRAN</label>
+					<object class="wxMenuItem" name="ID_MENUITEM44" variable="MenuItem18" member="yes">
+						<label>Executable</label>
+						<enabled>0</enabled>
+					</object>
+				</object>
+				<object class="wxMenu" name="ID_MENUITEM40" variable="MenuItem14" member="yes">
+					<label>Python</label>
+					<object class="wxMenuItem" name="ID_MENUITEM45" variable="MenuItem19" member="yes">
+						<label>Executable</label>
+					</object>
+				</object>
+				<object class="wxMenu" name="ID_MENUITEM41" variable="MenuItem15" member="yes">
+					<label>Pascal Delphi</label>
+					<object class="wxMenuItem" name="ID_MENUITEM46" variable="MenuItem20" member="yes">
+						<label>Executable</label>
+					</object>
+				</object>
+			</object>
 			<object class="wxMenuItem" name="ID_MENUITEM31" variable="pumCode" member="yes">
 				<label>Code (VS)</label>
 				<handler function="OnpumCodeSelected" entry="EVT_MENU" />
@@ -120,6 +170,10 @@
 				<object class="wxMenuItem" name="ID_MENUITEM35" variable="pumGitDT" member="yes">
 					<label>GitHub Desktop</label>
 					<handler function="OnpumGitDTSelected" entry="EVT_MENU" />
+				</object>
+				<object class="wxMenuItem" name="ID_MENUITEM47" variable="pumPikaBK" member="yes">
+					<label>Pika Backup</label>
+					<handler function="OnpumPikaBKSelected" entry="EVT_MENU" />
 				</object>
 				<object class="wxMenuItem" name="ID_MENUITEM20" variable="pum7Zzip" member="yes">
 					<label>7 Zip Gui</label>

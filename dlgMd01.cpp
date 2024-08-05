@@ -9,6 +9,15 @@
 #include "dlgXqt.h"
 #include <wx/clipbrd.h>
 #include "dlgSelCat.h"
+#include <wx/stdpaths.h>
+#include <wx/filename.h>
+#include "dlgGetStrFromUser.h"
+#include <wx/dir.h>
+#include <wx/filename.h>
+#include <wx/string.h>
+
+#include <vector>
+
 
 zDB01 zrdb;
 bcsGui gui01;
@@ -33,6 +42,21 @@ const long dlgMd01::ID_MENUITEM16 = wxNewId();
 const long dlgMd01::ID_MENUITEM9 = wxNewId();
 const long dlgMd01::ID_MENUITEM23 = wxNewId();
 const long dlgMd01::pumNewBlog = wxNewId();
+const long dlgMd01::ID_MENUITEM48 = wxNewId();
+const long dlgMd01::ID_MENUITEM49 = wxNewId();
+const long dlgMd01::ID_MENUITEM50 = wxNewId();
+const long dlgMd01::ID_MENUITEM51 = wxNewId();
+const long dlgMd01::ID_MENUITEM42 = wxNewId();
+const long dlgMd01::ID_MENUITEM39 = wxNewId();
+const long dlgMd01::ID_MENUITEM43 = wxNewId();
+const long dlgMd01::ID_MENUITEM37 = wxNewId();
+const long dlgMd01::ID_MENUITEM44 = wxNewId();
+const long dlgMd01::ID_MENUITEM38 = wxNewId();
+const long dlgMd01::ID_MENUITEM45 = wxNewId();
+const long dlgMd01::ID_MENUITEM40 = wxNewId();
+const long dlgMd01::ID_MENUITEM46 = wxNewId();
+const long dlgMd01::ID_MENUITEM41 = wxNewId();
+const long dlgMd01::ID_MENUITEM36 = wxNewId();
 const long dlgMd01::ID_MENUITEM31 = wxNewId();
 const long dlgMd01::ID_MENUITEM34 = wxNewId();
 const long dlgMd01::ID_MENUITEM33 = wxNewId();
@@ -40,6 +64,7 @@ const long dlgMd01::ID_MENUITEM29 = wxNewId();
 const long dlgMd01::ID_MENUITEM30 = wxNewId();
 const long dlgMd01::ID_MENUITEM28 = wxNewId();
 const long dlgMd01::ID_MENUITEM35 = wxNewId();
+const long dlgMd01::ID_MENUITEM47 = wxNewId();
 const long dlgMd01::ID_MENUITEM20 = wxNewId();
 const long dlgMd01::ID_MENUITEM21 = wxNewId();
 const long dlgMd01::ID_MENUITEM26 = wxNewId();
@@ -108,6 +133,37 @@ dlgMd01::dlgMd01(wxWindow* parent,wxWindowID id)
     pumMaster.Append(ID_MENUITEM23, _("Categories"), MenuItem6, wxEmptyString);
     newBlgPost = new wxMenuItem((&pumMaster), pumNewBlog, _("New Blog Post"), wxEmptyString, wxITEM_NORMAL);
     pumMaster.Append(newBlgPost);
+    pumWiki = new wxMenuItem((&pumMaster), ID_MENUITEM48, _("Wikipedia"), wxEmptyString, wxITEM_NORMAL);
+    pumMaster.Append(pumWiki);
+    pumSmartyApp = new wxMenuItem((&pumMaster), ID_MENUITEM49, _("New Smarty Project"), wxEmptyString, wxITEM_NORMAL);
+    pumMaster.Append(pumSmartyApp);
+    pumEmail01 = new wxMenuItem((&pumMaster), ID_MENUITEM50, _("Email For Arch Brooks.com"), wxEmptyString, wxITEM_NORMAL);
+    pumMaster.Append(pumEmail01);
+    pumLACob = new wxMenuItem((&pumMaster), ID_MENUITEM51, _("List All COBOL Files"), wxEmptyString, wxITEM_NORMAL);
+    pumMaster.Append(pumLACob);
+    MenuItem10 = new wxMenu();
+    MenuItem13 = new wxMenu();
+    MenuItem16 = new wxMenuItem(MenuItem13, ID_MENUITEM42, _("Executable"), wxEmptyString, wxITEM_NORMAL);
+    MenuItem13->Append(MenuItem16);
+    MenuItem10->Append(ID_MENUITEM39, _("c++"), MenuItem13, wxEmptyString);
+    MenuItem11 = new wxMenu();
+    MenuItem17 = new wxMenuItem(MenuItem11, ID_MENUITEM43, _("Executable"), wxEmptyString, wxITEM_NORMAL);
+    MenuItem11->Append(MenuItem17);
+    MenuItem10->Append(ID_MENUITEM37, _("COBOL"), MenuItem11, wxEmptyString);
+    MenuItem12 = new wxMenu();
+    MenuItem18 = new wxMenuItem(MenuItem12, ID_MENUITEM44, _("Executable"), wxEmptyString, wxITEM_NORMAL);
+    MenuItem12->Append(MenuItem18);
+    MenuItem18->Enable(false);
+    MenuItem10->Append(ID_MENUITEM38, _("FORTRAN"), MenuItem12, wxEmptyString);
+    MenuItem14 = new wxMenu();
+    MenuItem19 = new wxMenuItem(MenuItem14, ID_MENUITEM45, _("Executable"), wxEmptyString, wxITEM_NORMAL);
+    MenuItem14->Append(MenuItem19);
+    MenuItem10->Append(ID_MENUITEM40, _("Python"), MenuItem14, wxEmptyString);
+    MenuItem15 = new wxMenu();
+    MenuItem20 = new wxMenuItem(MenuItem15, ID_MENUITEM46, _("Executable"), wxEmptyString, wxITEM_NORMAL);
+    MenuItem15->Append(MenuItem20);
+    MenuItem10->Append(ID_MENUITEM41, _("Pascal Delphi"), MenuItem15, wxEmptyString);
+    pumMaster.Append(ID_MENUITEM36, _("Development"), MenuItem10, wxEmptyString);
     pumCode = new wxMenuItem((&pumMaster), ID_MENUITEM31, _("Code (VS)"), wxEmptyString, wxITEM_NORMAL);
     pumMaster.Append(pumCode);
     MenuItem5 = new wxMenu();
@@ -123,6 +179,8 @@ dlgMd01::dlgMd01(wxWindow* parent,wxWindowID id)
     MenuItem5->Append(ID_MENUITEM28, _("SQL Tools"), MenuItem8, wxEmptyString);
     pumGitDT = new wxMenuItem(MenuItem5, ID_MENUITEM35, _("GitHub Desktop"), wxEmptyString, wxITEM_NORMAL);
     MenuItem5->Append(pumGitDT);
+    pumPikaBK = new wxMenuItem(MenuItem5, ID_MENUITEM47, _("Pika Backup"), wxEmptyString, wxITEM_NORMAL);
+    MenuItem5->Append(pumPikaBK);
     pum7Zzip = new wxMenuItem(MenuItem5, ID_MENUITEM20, _("7 Zip Gui"), wxEmptyString, wxITEM_NORMAL);
     MenuItem5->Append(pum7Zzip);
     pumRSLBk = new wxMenuItem(MenuItem5, ID_MENUITEM21, _("Rsync Lucky Backup"), wxEmptyString, wxITEM_NORMAL);
@@ -175,11 +233,16 @@ dlgMd01::dlgMd01(wxWindow* parent,wxWindowID id)
     Connect(ID_MENUITEM10,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&dlgMd01::OnpumAscCatsSelected1);
     Connect(ID_MENUITEM16,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&dlgMd01::OnmenPriCatsSelected);
     Connect(pumNewBlog,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&dlgMd01::OnpumNewBlogPostSelected);
+    Connect(ID_MENUITEM48,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&dlgMd01::OnpumWikiSelected);
+    Connect(ID_MENUITEM49,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&dlgMd01::OnpumSmartyAppSelected);
+    Connect(ID_MENUITEM50,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&dlgMd01::OnpumEmail01Selected);
+    Connect(ID_MENUITEM51,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&dlgMd01::OnpumLACobSelected);
     Connect(ID_MENUITEM31,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&dlgMd01::OnpumCodeSelected);
     Connect(ID_MENUITEM34,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&dlgMd01::OnpumSysMon2Selected);
     Connect(ID_MENUITEM29,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&dlgMd01::OnpumQuerryBuiderSelected);
     Connect(ID_MENUITEM30,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&dlgMd01::OnpumMYSqlBuilderSelected);
     Connect(ID_MENUITEM35,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&dlgMd01::OnpumGitDTSelected);
+    Connect(ID_MENUITEM47,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&dlgMd01::OnpumPikaBKSelected);
     Connect(ID_MENUITEM20,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&dlgMd01::Onpum7ZzipSelected);
     Connect(ID_MENUITEM21,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&dlgMd01::OnpumRSLBkSelected);
     Connect(ID_MENUITEM26,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&dlgMd01::OnpumRSyncSASelected);
@@ -260,6 +323,31 @@ void dlgMd01::OnLinksRightUp(wxMouseEvent& event)
 {
     PopupMenu( & pumDetails );
 
+}
+
+void TraverseDirectory(const wxString& directory, const wxString& extension, std::vector<wxString>& result)
+{
+    wxDir dir(directory);
+    if (!dir.IsOpened())
+    {
+        return;
+    }
+
+    wxString filename;
+    bool cont = dir.GetFirst(&filename);
+    while (cont)
+    {
+        wxString filepath = directory + wxFileName::GetPathSeparator() + filename;
+        if (wxDirExists(filepath))
+        {
+            TraverseDirectory(filepath, extension, result);
+        }
+        else if (filepath.EndsWith(extension))
+        {
+            result.push_back(filepath);
+        }
+        cont = dir.GetNext(&filename);
+    }
 }
 
 void dlgMd01::OnListBox1DClick(wxCommandEvent& event)
@@ -602,10 +690,10 @@ void dlgMd01::OnpumNewBlogPostSelected(wxCommandEvent& event)
 
     string tbuf;
     tbuf = "<a href=\"https://archman.us\" target=\"_blank\" rel=\"noopener\">";
-    tbuf = tbuf + "    <img src=\"https://archman.us/images/usa_3a.gif\" alt=\" \" />";
+    tbuf = tbuf + "    <img src=\"https://archman.us/images/usa_3a.gif\" alt=\"USA\" />";
     tbuf = tbuf + "</a>\n\n";
     //tbuf = "<img src=\"http://archman.us/images/usa_3a.gif\" alt=\"\" />\n\n";
-    tbuf = tbuf + "Mr. Arch Brooks, Software Engineer, Brooks Computing Systems, LLC authored this article.";
+    tbuf = tbuf + "Mr.<a href=\"https://archman.us\" target=\"_blank\" rel=\"noopener\">Arch Brooks</a>, Software Engineer, Brooks Computing Systems, LLC authored this article.";
     if (wxTheClipboard->Open())
     {
         // This data objects are held by the clipboard,
@@ -616,7 +704,7 @@ void dlgMd01::OnpumNewBlogPostSelected(wxCommandEvent& event)
     }
 
 
-    cmd = defBro + " " + "http://archman.us/b4/wp-admin/post-new.php & ";
+    cmd = defBro + " " + "https://archman.us/b4/wp-admin/post-new.php & ";
     system(cmd.c_str());
 
 
@@ -746,4 +834,84 @@ void dlgMd01::OnpumSysMon2Selected(wxCommandEvent& event)
 void dlgMd01::OnpumGitDTSelected(wxCommandEvent& event)
 {
     system("/usr/bin/github-desktop & ");
+}
+
+void dlgMd01::OnpumPikaBKSelected(wxCommandEvent& event)
+{
+    system("pika-backup & ");
+}
+
+void dlgMd01::OnpumWikiSelected(wxCommandEvent& event)
+{
+    system("brave https://en.wikipedia.org/wiki/Main_Page");
+}
+
+void dlgMd01::OnpumDBeaverSelected(wxCommandEvent& event)
+{
+    system("dbeaver & ");
+}
+
+void dlgMd01::OnpumSmartyAppSelected(wxCommandEvent& event)
+{
+    wxDirDialog dlg(this, "Select A Directory", "/home/archman/workspace/smarty/", wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
+    if (dlg.ShowModal() == wxID_OK)
+    {
+        wxString selected_dir = dlg.GetPath();
+//          dlg->Caption = "xxx";
+//           dir_label.SetLabel(f"Select Directory: {selected_dir}")
+    }
+
+    std::string cPath = "";
+    std::string path = wxStandardPaths::Get().GetExecutablePath().ToStdString();
+    std::string rPath = "";
+//    cmd = "code ";
+    rPath = dlg.GetPath().ToStdString();
+    wxSetWorkingDirectory(rPath.c_str());
+
+    wxFileName::Mkdir("templates");
+    wxFileName::Mkdir("templates_c");
+    wxFileName::Mkdir("cache");
+    wxFileName::Mkdir("configs");
+
+
+    dlgGetStrFromUser dlg2(NULL, wxID_ANY);
+    if (dlg2.ShowModal() == wxID_OK)
+    {
+
+    }
+    dlg2.Destroy();
+
+    dlg.Destroy();
+//    system(cmd.c_str());
+
+}
+
+void dlgMd01::OnpumSpringInitSelected(wxCommandEvent& event)
+{
+    string cmd = "";
+    cmd = "brave https://start.spring.io/";
+    system(cmd.c_str());
+}
+
+void dlgMd01::OnpumEmail01Selected(wxCommandEvent& event)
+{
+    system("brave http://email.archbrooks.com ");
+}
+
+void dlgMd01::OnpumLACobSelected(wxCommandEvent& event)
+{
+    std::vector<wxString> result;
+    //wxString directory = "/home/archman/workspace/cob";
+    wxString directory = "/home/archman/workspace";
+//    wxString extension = ".cob";
+    wxString extension = ".cbl";
+
+    TraverseDirectory(directory, extension, result);
+
+    // Print the results
+    for (const auto& file : result)
+    {
+        wxPuts(file);
+    }
+
 }

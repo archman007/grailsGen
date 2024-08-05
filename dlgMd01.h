@@ -33,6 +33,12 @@ public:
     wxListBox* ListBox2;
     wxMenu pumDetails;
     wxMenu pumMaster;
+    wxMenu* MenuItem10;
+    wxMenu* MenuItem11;
+    wxMenu* MenuItem12;
+    wxMenu* MenuItem13;
+    wxMenu* MenuItem14;
+    wxMenu* MenuItem15;
     wxMenu* MenuItem1;
     wxMenu* MenuItem2;
     wxMenu* MenuItem3;
@@ -41,6 +47,11 @@ public:
     wxMenu* MenuItem7;
     wxMenu* MenuItem8;
     wxMenu* MenuItem9;
+    wxMenuItem* MenuItem16;
+    wxMenuItem* MenuItem17;
+    wxMenuItem* MenuItem18;
+    wxMenuItem* MenuItem19;
+    wxMenuItem* MenuItem20;
     wxMenuItem* MenuItem4;
     wxMenuItem* menDetails;
     wxMenuItem* menEditCats;
@@ -58,16 +69,21 @@ public:
     wxMenuItem* pumCode;
     wxMenuItem* pumDDink;
     wxMenuItem* pumEditDetail;
+    wxMenuItem* pumEmail01;
     wxMenuItem* pumGitDT;
+    wxMenuItem* pumLACob;
     wxMenuItem* pumMYSqlBuilder;
     wxMenuItem* pumNewBlogArt;
+    wxMenuItem* pumPikaBK;
     wxMenuItem* pumQuerryBuider;
     wxMenuItem* pumRSA;
     wxMenuItem* pumRSLBk;
     wxMenuItem* pumRelLink;
+    wxMenuItem* pumSmartyApp;
     wxMenuItem* pumSortID;
     wxMenuItem* pumSysMon2;
     wxMenuItem* pumSysMon;
+    wxMenuItem* pumWiki;
     wxMenuItem* pumwxGlade;
     wxStaticText* StaticText1;
     wxStaticText* StaticText2;
@@ -90,6 +106,21 @@ protected:
     static const long ID_MENUITEM9;
     static const long ID_MENUITEM23;
     static const long pumNewBlog;
+    static const long ID_MENUITEM48;
+    static const long ID_MENUITEM49;
+    static const long ID_MENUITEM50;
+    static const long ID_MENUITEM51;
+    static const long ID_MENUITEM42;
+    static const long ID_MENUITEM39;
+    static const long ID_MENUITEM43;
+    static const long ID_MENUITEM37;
+    static const long ID_MENUITEM44;
+    static const long ID_MENUITEM38;
+    static const long ID_MENUITEM45;
+    static const long ID_MENUITEM40;
+    static const long ID_MENUITEM46;
+    static const long ID_MENUITEM41;
+    static const long ID_MENUITEM36;
     static const long ID_MENUITEM31;
     static const long ID_MENUITEM34;
     static const long ID_MENUITEM33;
@@ -97,6 +128,7 @@ protected:
     static const long ID_MENUITEM30;
     static const long ID_MENUITEM28;
     static const long ID_MENUITEM35;
+    static const long ID_MENUITEM47;
     static const long ID_MENUITEM20;
     static const long ID_MENUITEM21;
     static const long ID_MENUITEM26;
@@ -157,6 +189,13 @@ private:
     void OnpumSysMonSelected1(wxCommandEvent& event);
     void OnpumSysMon2Selected(wxCommandEvent& event);
     void OnpumGitDTSelected(wxCommandEvent& event);
+    void OnpumPikaBKSelected(wxCommandEvent& event);
+    void OnpumWikiSelected(wxCommandEvent& event);
+    void OnpumDBeaverSelected(wxCommandEvent& event);
+    void OnpumSmartyAppSelected(wxCommandEvent& event);
+    void OnpumSpringInitSelected(wxCommandEvent& event);
+    void OnpumEmail01Selected(wxCommandEvent& event);
+    void OnpumLACobSelected(wxCommandEvent& event);
     //*)
 
     DECLARE_EVENT_TABLE()

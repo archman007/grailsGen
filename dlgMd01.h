@@ -67,6 +67,7 @@ public:
     wxMenuItem* pumAscSeq;
     wxMenuItem* pumBleachBit;
     wxMenuItem* pumCode;
+    wxMenuItem* pumDBeav;
     wxMenuItem* pumDDink;
     wxMenuItem* pumEditDetail;
     wxMenuItem* pumEmail01;
@@ -110,6 +111,7 @@ protected:
     static const long ID_MENUITEM49;
     static const long ID_MENUITEM50;
     static const long ID_MENUITEM51;
+    static const long ID_MENUITEM52;
     static const long ID_MENUITEM42;
     static const long ID_MENUITEM39;
     static const long ID_MENUITEM43;
@@ -196,6 +198,7 @@ private:
     void OnpumSpringInitSelected(wxCommandEvent& event);
     void OnpumEmail01Selected(wxCommandEvent& event);
     void OnpumLACobSelected(wxCommandEvent& event);
+    void OnpumDBeavSelected(wxCommandEvent& event);
     //*)
 
     DECLARE_EVENT_TABLE()

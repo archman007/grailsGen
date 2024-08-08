@@ -109,6 +109,10 @@
 				<label>List All COBOL Files</label>
 				<handler function="OnpumLACobSelected" entry="EVT_MENU" />
 			</object>
+			<object class="wxMenuItem" name="ID_MENUITEM52" variable="pumDBeav" member="yes">
+				<label>DBeaver</label>
+				<handler function="OnpumDBeavSelected" entry="EVT_MENU" />
+			</object>
 			<object class="wxMenu" name="ID_MENUITEM36" variable="MenuItem10" member="yes">
 				<label>Development</label>
 				<object class="wxMenu" name="ID_MENUITEM39" variable="MenuItem13" member="yes">

@@ -46,6 +46,7 @@ const long dlgMd01::ID_MENUITEM48 = wxNewId();
 const long dlgMd01::ID_MENUITEM49 = wxNewId();
 const long dlgMd01::ID_MENUITEM50 = wxNewId();
 const long dlgMd01::ID_MENUITEM51 = wxNewId();
+const long dlgMd01::ID_MENUITEM52 = wxNewId();
 const long dlgMd01::ID_MENUITEM42 = wxNewId();
 const long dlgMd01::ID_MENUITEM39 = wxNewId();
 const long dlgMd01::ID_MENUITEM43 = wxNewId();
@@ -141,6 +142,8 @@ dlgMd01::dlgMd01(wxWindow* parent,wxWindowID id)
     pumMaster.Append(pumEmail01);
     pumLACob = new wxMenuItem((&pumMaster), ID_MENUITEM51, _("List All COBOL Files"), wxEmptyString, wxITEM_NORMAL);
     pumMaster.Append(pumLACob);
+    pumDBeav = new wxMenuItem((&pumMaster), ID_MENUITEM52, _("DBeaver"), wxEmptyString, wxITEM_NORMAL);
+    pumMaster.Append(pumDBeav);
     MenuItem10 = new wxMenu();
     MenuItem13 = new wxMenu();
     MenuItem16 = new wxMenuItem(MenuItem13, ID_MENUITEM42, _("Executable"), wxEmptyString, wxITEM_NORMAL);
@@ -237,6 +240,7 @@ dlgMd01::dlgMd01(wxWindow* parent,wxWindowID id)
     Connect(ID_MENUITEM49,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&dlgMd01::OnpumSmartyAppSelected);
     Connect(ID_MENUITEM50,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&dlgMd01::OnpumEmail01Selected);
     Connect(ID_MENUITEM51,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&dlgMd01::OnpumLACobSelected);
+    Connect(ID_MENUITEM52,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&dlgMd01::OnpumDBeavSelected);
     Connect(ID_MENUITEM31,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&dlgMd01::OnpumCodeSelected);
     Connect(ID_MENUITEM34,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&dlgMd01::OnpumSysMon2Selected);
     Connect(ID_MENUITEM29,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&dlgMd01::OnpumQuerryBuiderSelected);
@@ -693,7 +697,7 @@ void dlgMd01::OnpumNewBlogPostSelected(wxCommandEvent& event)
     tbuf = tbuf + "    <img src=\"https://archman.us/images/usa_3a.gif\" alt=\"USA\" />";
     tbuf = tbuf + "</a>\n\n";
     //tbuf = "<img src=\"http://archman.us/images/usa_3a.gif\" alt=\"\" />\n\n";
-    tbuf = tbuf + "Mr.<a href=\"https://archman.us\" target=\"_blank\" rel=\"noopener\">Arch Brooks</a>, Software Engineer, Brooks Computing Systems, LLC authored this article.";
+    tbuf = tbuf + "Mr. <a href=\"https://archman.us\" target=\"_blank\" rel=\"noopener\">Arch Brooks</a>, Software Engineer, Brooks Computing Systems, LLC authored this article.";
     if (wxTheClipboard->Open())
     {
         // This data objects are held by the clipboard,
@@ -851,9 +855,40 @@ void dlgMd01::OnpumDBeaverSelected(wxCommandEvent& event)
     system("dbeaver & ");
 }
 
+wxString ReadFileIntoMemory(const wxString& filePath) {
+    wxFile file(filePath);
+    if (!file.IsOpened()) {
+        wxLogError("Could not open the file: %s", filePath);
+        return "";
+    }
+
+    wxFileOffset fileSize = file.Length();
+    if (fileSize == wxInvalidOffset) {
+        wxLogError("Could not determine the file size: %s", filePath);
+        return "";
+    }
+
+    wxString fileContent;
+    file.ReadAll(&fileContent);
+    return fileContent;
+}
+
+#include <wx/textfile.h>
+
+void SaveStringToFile(const wxString& content, const wxString& filename) {
+    wxTextFile file(filename);
+    if (!file.Open()) {
+        file.Create();  // Create the file if it doesn't exist
+    }
+    file.AddLine(content);
+    file.Write();
+    file.Close();
+}
+
 void dlgMd01::OnpumSmartyAppSelected(wxCommandEvent& event)
 {
-    wxDirDialog dlg(this, "Select A Directory", "/home/archman/workspace/smarty/", wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST);
+    //wxDirDialog dlg(this, "Select A Directory", "/home/archman/workspace/smarty/", wxDD_DEFAULT_STYLE | wxDD_DIR_MUST_EXIST | wxDD_NEW_DIR_BUTTON);
+    wxDirDialog dlg(this, "Select A Directory", "/home/archman/workspace/smarty/",wxDD_NEW_DIR_BUTTON);
     if (dlg.ShowModal() == wxID_OK)
     {
         wxString selected_dir = dlg.GetPath();
@@ -872,14 +907,29 @@ void dlgMd01::OnpumSmartyAppSelected(wxCommandEvent& event)
     wxFileName::Mkdir("templates_c");
     wxFileName::Mkdir("cache");
     wxFileName::Mkdir("configs");
+    wxFileName::Mkdir("src");
+
+    wxString filePath = wxStandardPaths::Get().GetExecutablePath();
+    filePath = wxFileName(filePath).GetPath() + "/tst.php";
+    wxString fileContent = ReadFileIntoMemory(filePath);
+    wxLogMessage("File content:\n%s", fileContent);
+
+    std::string cmd = "touch  " + rPath + "/src/tst.php";
+
+    system(cmd.c_str());
+
+    //SaveStringToFile(fileContent, rPath + "/src/tst.php");
+        SaveStringToFile(fileContent, rPath + "/tst.php");
+
 
 
     dlgGetStrFromUser dlg2(NULL, wxID_ANY);
-    if (dlg2.ShowModal() == wxID_OK)
+/*    if (dlg2.ShowModal() == wxID_OK)
     {
 
     }
     dlg2.Destroy();
+    */
 
     dlg.Destroy();
 //    system(cmd.c_str());
@@ -914,4 +964,9 @@ void dlgMd01::OnpumLACobSelected(wxCommandEvent& event)
         wxPuts(file);
     }
 
+}
+
+void dlgMd01::OnpumDBeavSelected(wxCommandEvent& event)
+{
+    system("dbeaver & ");
 }
